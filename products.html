@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品紹介 - 黄色いフルーツ牛乳</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #FFEB3B 0%, #FFF176 50%, #FFEB3B 100%);
+        }
+        
+        .product-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(255, 235, 59, 0.4);
+        }
+        
+        .cart-badge {
+            animation: bounce 0.5s ease-in-out;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        .price-tag {
+            background: linear-gradient(45deg, #FF6B6B, #FFE66D);
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white/20 backdrop-blur-md shadow-lg">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold text-gray-800">🥛 黄色いフルーツ牛乳</div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="text-gray-800 hover:text-yellow-600 font-medium">ホーム</a>
+                    <a href="products.html" class="text-gray-800 hover:text-yellow-600 font-medium">商品紹介</a>
+                    <a href="team.html" class="text-gray-800 hover:text-yellow-600 font-medium">チーム</a>
+                    <a href="contact.html" class="text-gray-800 hover:text-yellow-600 font-medium">お問い合わせ</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button onclick="showCart()" class="relative bg-yellow-500 text-white px-4 py-2 rounded-full hover:bg-yellow-600 transition-colors">
+                        🛒 カート
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-2 py-1 hidden">0</span>
+                    </button>
+                    <div class="md:hidden">
+                        <button id="mobile-menu-btn" class="text-gray-800">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white/90 backdrop-blur-md">
+        <div class="px-4 py-2 space-y-2">
+            <a href="index.html" class="block text-gray-800 hover:text-yellow-600 py-2">ホーム</a>
+            <a href="products.html" class="block text-gray-800 hover:text-yellow-600 py-2">商品紹介</a>
+            <a href="team.html" class="block text-gray-800 hover:text-yellow-600 py-2">チーム</a>
+            <a href="contact.html" class="block text-gray-800 hover:text-yellow-600 py-2">お問い合わせ</a>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <div class="container mx-auto px-4 py-16 text-center">
+        <h1 class="text-5xl md:text-6xl font-bold text-gray-800 mb-6">
+            商品紹介
+        </h1>
+        <p class="text-xl text-gray-700 mb-8">
+            5つの黄色い果実から生まれた、特別なミルクをご紹介
+        </p>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="container mx-auto px-4 pb-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Product 1: Banana -->
+            <div class="product-card rounded-2xl p-6 text-center shadow-xl">
+                <div class="text-6xl mb-4">🍌</div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-3">バナナ × ミルク</h3>
+                <p class="text-gray-600 mb-4">
+                    完熟バナナの濃厚な甘さと、新鮮なミルクの組み合わせ。
+                    まろやかで優しい味わいが心を温めます。
+                </p>
+                <div class="price-tag rounded-full px-4 py-2 inline-block mb-4">
+                    ¥150
+                </div>
+                <button onclick="addToCart('banana', 'バナナ × ミルク', 150)" 
+                        class="w-full bg-yellow-500 text-white py-3 rounded-lg font-bold hover:bg-yellow-600 transition-colors">
+                    カートに追加
+                </button>
+            </div>
+
+            <!-- Product 2: Mango -->
+            <div class="product-card rounded-2xl p-6 text-center shadow-xl">
+                <div class="text-6xl mb-4">🥭</div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-3">マンゴー × ミルク</h3>
+                <p class="text-gray-600 mb-4">
+                    南国の太陽を浴びたマンゴーの甘さと、
+                    クリーミーなミルクが織りなすトロピカルな味わい。
+                </p>
+                <div class="price-tag rounded-full px-4 py-2 inline-block mb-4">
+                    ¥150
+                </div>
+                <button onclick="addToCart('mango', 'マンゴー × ミルク', 150)" 
+                        class="w-full bg-yellow-500 text-white py-3 rounded-lg font-bold hover:bg-yellow-600 transition-colors">
+                    カートに追加
+                </button>
+            </div>
+
+            <!-- Product 3: Pineapple -->
+            <div class="product-card rounded-2xl p-6 text-center shadow-xl">
+                <div class="text-6xl mb-4">🍍</div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-3">パイナップル × ミルク</h3>
+                <p class="text-gray-600 mb-4">
+                    爽やかな酸味と自然な甘さが特徴のパイナップルと、
+                    まろやかなミルクの絶妙なバランス。
+                </p>
+                <div class="price-tag rounded-full px-4 py-2 inline-block mb-4">
+                    ¥150
+                </div>
+                <button onclick="addToCart('pineapple', 'パイナップル × ミルク', 150)" 
+                        class="w-full bg-yellow-500 text-white py-3 rounded-lg font-bold hover:bg-yellow-600 transition-colors">
+                    カートに追加
+                </button>
+            </div>
+
+            <!-- Product 4: Peach -->
+            <div class="product-card rounded-2xl p-6 text-center shadow-xl">
+                <div class="text-6xl mb-4">🍑</div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-3">黄桃 × ミルク</h3>
+                <p class="text-gray-600 mb-4">
+                    上品で繊細な黄桃の甘みと、
+                    なめらかなミルクが作り出す、贅沢な味わい。
+                </p>
+                <div class="price-tag rounded-full px-4 py-2 inline-block mb-4">
+                    ¥150
+                </div>
+                <button onclick="addToCart('peach', '黄桃 × ミルク', 150)" 
+                        class="w-full bg-yellow-500 text-white py-3 rounded-lg font-bold hover:bg-yellow-600 transition-colors">
+                    カートに追加
+                </button>
+            </div>
+
+            <!-- Product 5: Passion Fruit -->
+            <div class="product-card rounded-2xl p-6 text-center shadow-xl">
+                <div class="text-6xl mb-4">🫐</div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-3">パッションフルーツ × ミルク</h3>
+                <p class="text-gray-600 mb-4">
+                    エキゾチックで個性的なパッションフルーツの風味と、
+                    クリーミーなミルクの組み合わせ。
+                </p>
+                <div class="price-tag rounded-full px-4 py-2 inline-block mb-4">
+                    ¥150
+                </div>
+                <button onclick="addToCart('passion', 'パッションフルーツ × ミルク', 150)" 
+                        class="w-full bg-yellow-500 text-white py-3 rounded-lg font-bold hover:bg-yellow-600 transition-colors">
+                    カートに追加
+                </button>
+            </div>
+
+            <!-- Special Set -->
+            <div class="product-card rounded-2xl p-6 text-center shadow-xl bg-gradient-to-br from-yellow-100 to-orange-100">
+                <div class="text-6xl mb-4">🎁</div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-3">5本セット</h3>
+                <p class="text-gray-600 mb-4">
+                    すべての味を楽しめる特別セット。
+                    お得な価格で黄色い果実の世界を体験してください。
+                </p>
+                <div class="price-tag rounded-full px-4 py-2 inline-block mb-4">
+                    ¥700 <span class="text-sm line-through opacity-70">¥750</span>
+                </div>
+                <button onclick="addToCart('set', '5本セット', 700)" 
+                        class="w-full bg-gradient-to-r from-yellow-500 to-orange-500 text-white py-3 rounded-lg font-bold hover:from-yellow-600 hover:to-orange-600 transition-colors">
+                    セットをカートに追加
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shopping Cart Modal -->
+    <div id="cart-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-2xl p-6 max-w-md mx-4 w-full">
+            <h3 class="text-2xl font-bold text-center mb-4">🛒 ショッピングカート</h3>
+            <div id="cart-items" class="space-y-3 mb-4 max-h-64 overflow-y-auto">
+                <!-- Cart items will be added here -->
+            </div>
+            <div class="border-t pt-4">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-xl font-bold">合計:</span>
+                    <span id="total-price" class="text-2xl font-bold text-yellow-600">¥0</span>
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="clearCart()" class="flex-1 bg-gray-500 text-white py-2 rounded-lg hover:bg-gray-600 transition-colors">
+                        クリア
+                    </button>
+                    <button onclick="checkout()" class="flex-1 bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition-colors">
+                        お会計
+                    </button>
+                    <button onclick="hideCart()" class="flex-1 bg-yellow-500 text-white py-2 rounded-lg hover:bg-yellow-600 transition-colors">
+                        閉じる
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-2xl p-6 max-w-sm mx-4 text-center">
+            <div class="text-6xl mb-4">🎉</div>
+            <h3 class="text-2xl font-bold mb-4">お会計完了！</h3>
+            <p class="text-gray-600 mb-2">ご購入ありがとうございます</p>
+            <p id="final-total" class="text-3xl font-bold text-yellow-600 mb-4">¥0</p>
+            <p class="text-sm text-gray-500 mb-4">
+                ※これはデモンストレーションです。<br>
+                実際の商品は販売されていません。
+            </p>
+            <button onclick="hideCheckout()" class="w-full bg-yellow-500 text-white py-2 rounded-lg hover:bg-yellow-600 transition-colors">
+                閉じる
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white/20 backdrop-blur-md py-8 mt-16">
+        <div class="container mx-auto px-4 text-center text-gray-800">
+            <p>&copy; 2024 黄色いフルーツ牛乳. すべては、黄色のために。</p>
+        </div>
+    </footer>
+
+    <script>
+        let cart = [];
+        let totalPrice = 0;
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Add to cart function
+        function addToCart(id, name, price) {
+            const existingItem = cart.find(item => item.id === id);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: id,
+                    name: name,
+                    price: price,
+                    quantity: 1
+                });
+            }
+            
+            updateCartUI();
+            showCartBadge();
+        }
+
+        // Update cart UI
+        function updateCartUI() {
+            const cartCount = document.getElementById('cart-count');
+            const cartItems = document.getElementById('cart-items');
+            const totalPriceElement = document.getElementById('total-price');
+            
+            // Calculate totals
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            // Update cart count
+            if (totalItems > 0) {
+                cartCount.textContent = totalItems;
+                cartCount.classList.remove('hidden');
+            } else {
+                cartCount.classList.add('hidden');
+            }
+            
+            // Update cart items
+            cartItems.innerHTML = '';
+            cart.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'flex justify-between items-center bg-gray-50 p-3 rounded-lg';
+                itemElement.innerHTML = `
+                    <div>
+                        <div class="font-medium">${item.name}</div>
+                        <div class="text-sm text-gray-600">¥${item.price} × ${item.quantity}</div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button onclick="decreaseQuantity('${item.id}')" class="bg-gray-300 w-6 h-6 rounded-full text-sm">-</button>
+                        <span class="w-8 text-center">${item.quantity}</span>
+                        <button onclick="increaseQuantity('${item.id}')" class="bg-gray-300 w-6 h-6 rounded-full text-sm">+</button>
+                        <button onclick="removeFromCart('${item.id}')" class="bg-red-500 text-white w-6 h-6 rounded-full text-sm ml-2">×</button>
+                    </div>
+                `;
+                cartItems.appendChild(itemElement);
+            });
+            
+            // Update total price
+            totalPriceElement.textContent = `¥${totalPrice}`;
+        }
+
+        // Show cart badge animation
+        function showCartBadge() {
+            const cartCount = document.getElementById('cart-count');
+            cartCount.classList.add('cart-badge');
+            setTimeout(() => {
+                cartCount.classList.remove('cart-badge');
+            }, 500);
+        }
+
+        // Increase quantity
+        function increaseQuantity(id) {
+            const item = cart.find(item => item.id === id);
+            if (item) {
+                item.quantity += 1;
+                updateCartUI();
+            }
+        }
+
+        // Decrease quantity
+        function decreaseQuantity(id) {
+            const item = cart.find(item => item.id === id);
+            if (item && item.quantity > 1) {
+                item.quantity -= 1;
+                updateCartUI();
+            }
+        }
+
+        // Remove from cart
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCartUI();
+        }
+
+        // Show cart modal
+        function showCart() {
+            document.getElementById('cart-modal').classList.remove('hidden');
+        }
+
+        // Hide cart modal
+        function hideCart() {
+            document.getElementById('cart-modal').classList.add('hidden');
+        }
+
+        // Clear cart
+        function clearCart() {
+            cart = [];
+            totalPrice = 0;
+            updateCartUI();
+        }
+
+        // Checkout
+        function checkout() {
+            if (cart.length === 0) {
+                alert('カートが空です！');
+                return;
+            }
+            
+            document.getElementById('final-total').textContent = `¥${totalPrice}`;
+            document.getElementById('cart-modal').classList.add('hidden');
+            document.getElementById('checkout-modal').classList.remove('hidden');
+            
+            // Clear cart after checkout
+            clearCart();
+        }
+
+        // Hide checkout modal
+        function hideCheckout() {
+            document.getElementById('checkout-modal').classList.add('hidden');
+        }
+
+        // Close modals when clicking outside
+        document.getElementById('cart-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideCart();
+            }
+        });
+
+        document.getElementById('checkout-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideCheckout();
+            }
+        });
+    </script>
+</body>
+</html> 

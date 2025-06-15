@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お問い合わせ - 黄色いフルーツ牛乳</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #FFEB3B 0%, #FFF176 50%, #FFEB3B 100%);
+        }
+        
+        .contact-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .input-field {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .input-field:focus {
+            border-color: #FFEB3B;
+            box-shadow: 0 0 0 3px rgba(255, 235, 59, 0.1);
+            transform: scale(1.02);
+        }
+        
+        .send-animation {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .floating-icons {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .floating-icons:nth-child(2) { animation-delay: -1s; }
+        .floating-icons:nth-child(3) { animation-delay: -2s; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white/20 backdrop-blur-md shadow-lg">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold text-gray-800">🥛 黄色いフルーツ牛乳</div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="text-gray-800 hover:text-yellow-600 font-medium">ホーム</a>
+                    <a href="products.html" class="text-gray-800 hover:text-yellow-600 font-medium">商品紹介</a>
+                    <a href="team.html" class="text-gray-800 hover:text-yellow-600 font-medium">チーム</a>
+                    <a href="contact.html" class="text-gray-800 hover:text-yellow-600 font-medium">お問い合わせ</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-800">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white/90 backdrop-blur-md">
+        <div class="px-4 py-2 space-y-2">
+            <a href="index.html" class="block text-gray-800 hover:text-yellow-600 py-2">ホーム</a>
+            <a href="products.html" class="block text-gray-800 hover:text-yellow-600 py-2">商品紹介</a>
+            <a href="team.html" class="block text-gray-800 hover:text-yellow-600 py-2">チーム</a>
+            <a href="contact.html" class="block text-gray-800 hover:text-yellow-600 py-2">お問い合わせ</a>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <div class="container mx-auto px-4 py-16 text-center">
+        <h1 class="text-5xl md:text-6xl font-bold text-gray-800 mb-6">
+            お問い合わせ
+        </h1>
+        <p class="text-xl text-gray-700 mb-8">
+            私たちに黄色い情熱を届けてください
+        </p>
+        <div class="flex justify-center space-x-4 mb-8">
+            <span class="floating-icons text-4xl">💛</span>
+            <span class="floating-icons text-4xl">📧</span>
+            <span class="floating-icons text-4xl">🌟</span>
+        </div>
+    </div>
+
+    <!-- Contact Form Section -->
+    <div class="container mx-auto px-4 pb-16">
+        <div class="max-w-2xl mx-auto">
+            <div class="contact-card rounded-3xl p-8 shadow-2xl">
+                <form id="contact-form" class="space-y-6">
+                    <!-- Name Field -->
+                    <div>
+                        <label for="name" class="block text-lg font-semibold text-gray-800 mb-2">
+                            お名前 <span class="text-red-500">*</span>
+                        </label>
+                        <input type="text" id="name" name="name" required
+                               class="input-field w-full px-4 py-3 rounded-xl bg-white/70 backdrop-blur-sm focus:outline-none focus:bg-white"
+                               placeholder="山田太郎">
+                    </div>
+
+                    <!-- Email Field -->
+                    <div>
+                        <label for="email" class="block text-lg font-semibold text-gray-800 mb-2">
+                            メールアドレス <span class="text-red-500">*</span>
+                        </label>
+                        <input type="email" id="email" name="email" required
+                               class="input-field w-full px-4 py-3 rounded-xl bg-white/70 backdrop-blur-sm focus:outline-none focus:bg-white"
+                               placeholder="example@email.com">
+                    </div>
+
+                    <!-- Subject Field -->
+                    <div>
+                        <label for="subject" class="block text-lg font-semibold text-gray-800 mb-2">
+                            件名
+                        </label>
+                        <select id="subject" name="subject"
+                                class="input-field w-full px-4 py-3 rounded-xl bg-white/70 backdrop-blur-sm focus:outline-none focus:bg-white">
+                            <option value="">件名を選択してください</option>
+                            <option value="product">商品について</option>
+                            <option value="order">注文について</option>
+                            <option value="collaboration">コラボレーション</option>
+                            <option value="feedback">ご意見・ご感想</option>
+                            <option value="other">その他</option>
+                        </select>
+                    </div>
+
+                    <!-- Message Field -->
+                    <div>
+                        <label for="message" class="block text-lg font-semibold text-gray-800 mb-2">
+                            メッセージ <span class="text-red-500">*</span>
+                        </label>
+                        <textarea id="message" name="message" rows="6" required
+                                  class="input-field w-full px-4 py-3 rounded-xl bg-white/70 backdrop-blur-sm focus:outline-none focus:bg-white resize-none"
+                                  placeholder="黄色いフルーツミルクへの熱い想いをお聞かせください..."></textarea>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="text-center">
+                        <button type="submit" 
+                                class="send-animation bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-12 py-4 rounded-full font-bold text-lg hover:from-yellow-600 hover:to-orange-600 transition-colors shadow-lg">
+                            💌 メッセージを送信
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="container mx-auto px-4 pb-16">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Location -->
+            <div class="contact-card rounded-2xl p-6 text-center shadow-xl">
+                <div class="text-5xl mb-4">🏢</div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">オフィス</h3>
+                <p class="text-gray-600">
+                    東京都墨田区隅田川<br>
+                    フルーツビル5階
+                </p>
+            </div>
+
+            <!-- Phone -->
+            <div class="contact-card rounded-2xl p-6 text-center shadow-xl">
+                <div class="text-5xl mb-4">📞</div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">電話</h3>
+                <p class="text-gray-600">
+                    080-6666-6666<br>
+                    平日 7:00-25:00
+                </p>
+            </div>
+
+            <!-- Email -->
+            <div class="contact-card rounded-2xl p-6 text-center shadow-xl">
+                <div class="text-5xl mb-4">✉️</div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">メール</h3>
+                <p class="text-gray-600">
+                    gakutyuuwa@gmail.com<br>
+                    24時間受付
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="container mx-auto px-4 pb-16">
+        <div class="contact-card rounded-3xl p-8 shadow-xl">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">よくある質問</h2>
+            <div class="space-y-4">
+                <div class="bg-white/50 rounded-xl p-4">
+                    <h3 class="font-bold text-gray-800 mb-2">Q: 商品はどこで購入できますか？</h3>
+                    <p class="text-gray-600">A: 現在はオンラインでのデモンストレーションのみとなっております。実際の販売は準備中です。</p>
+                </div>
+                <div class="bg-white/50 rounded-xl p-4">
+                    <h3 class="font-bold text-gray-800 mb-2">Q: アレルギー情報を教えてください</h3>
+                    <p class="text-gray-600">A: 乳製品を含みます。その他のアレルギー情報については個別にお問い合わせください。</p>
+                </div>
+                <div class="bg-white/50 rounded-xl p-4">
+                    <h3 class="font-bold text-gray-800 mb-2">Q: 新しい味の開発予定はありますか？</h3>
+                    <p class="text-gray-600">A: 常に新しい黄色い果実との組み合わせを研究しています。ご要望もお聞かせください！</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-2xl p-8 max-w-sm mx-4 text-center">
+            <div class="text-6xl mb-4">✨</div>
+            <h3 class="text-2xl font-bold mb-4">送信完了！</h3>
+            <p class="text-gray-600 mb-4">
+                メッセージをありがとうございます。<br>
+                黄色い情熱を受け取りました！
+            </p>
+            <p class="text-sm text-gray-500 mb-4">
+                ※これはデモンストレーションです。<br>
+                実際のメール送信は行われません。
+            </p>
+            <button onclick="hideSuccessModal()" class="w-full bg-yellow-500 text-white py-2 rounded-lg hover:bg-yellow-600 transition-colors">
+                閉じる
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white/20 backdrop-blur-md py-8">
+        <div class="container mx-auto px-4 text-center text-gray-800">
+            <p>&copy; 2024 黄色いフルーツ牛乳. すべては、黄色のために。</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Contact form submission
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const subject = formData.get('subject');
+            const message = formData.get('message');
+            
+            // Simple validation
+            if (!name || !email || !message) {
+                alert('必須項目を入力してください。');
+                return;
+            }
+            
+            if (!isValidEmail(email)) {
+                alert('正しいメールアドレスを入力してください。');
+                return;
+            }
+            
+            // Show success modal
+            showSuccessModal();
+            
+            // Reset form
+            this.reset();
+        });
+
+        // Email validation
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Show success modal
+        function showSuccessModal() {
+            document.getElementById('success-modal').classList.remove('hidden');
+        }
+
+        // Hide success modal
+        function hideSuccessModal() {
+            document.getElementById('success-modal').classList.add('hidden');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('success-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideSuccessModal();
+            }
+        });
+
+        // Add focus effects to form fields
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('.input-field');
+            
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.classList.add('focused');
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.parentElement.classList.remove('focused');
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
